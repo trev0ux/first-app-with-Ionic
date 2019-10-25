@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar color="primary tint">
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="home"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+<ion-content color="primary" padding>            
+  <form>
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Login</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input name="email" type="email" placeholder="E-mail" [(ngModel)]="email"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="password" type="password" placeholder="Senha" [(ngModel)]="password"></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" expand="block" (click)="login()">Entrar</ion-button>
+          </div>
+          <ion-row>
+            <div text-center>
+          Se você ainda não possui uma conta<a routerLink='/register'>
+            registre-se</a>!
+            </div>
+        </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
