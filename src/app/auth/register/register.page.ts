@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
+import { HttpClient } from '@angular/common/http';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-register',
@@ -8,30 +8,30 @@ import { auth } from 'firebase/app';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+
+  postData = {
+    name: "AAATTTAdmin",
+    email:"tat1tt@gmail.com",
+    password: "654321",
+    confirma_password: "654321"
+  };
   
-  name: string = ""
-  email: string = ""
-  password: string = ""
-  confirm: string = ""
+  url = 'http://45.55.144.89/fsapi/users/auth/register-jwt';
+  json;
 
   ngOnInit() {
   }
 
-  constructor(public afAuth: AngularFireAuth) { }
+  constructor(private http: HttpClient) {
 
+    this.http.post(this.url, this.postData).toPromise().then((data:any) => {
+      console.log(data);
+      console.log(data.json);
+      this.json = JSON.stringify(data.json);
+    });
 
-  async register() {
-    const { name, password, email, confirm } = this
-    if(password !== confirm) {
-      return console.error("Senhas não coincidem")
-    } 
-    try {
-      const res = await this.afAuth.auth.createUserWithEmailAndPassword(email, password)      
-      console.log(res)
-  } catch(error) {
-      console.dir(error)
-    }
-}
+   }
+
 
 }
 

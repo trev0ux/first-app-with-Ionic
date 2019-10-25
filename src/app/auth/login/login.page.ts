@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -10,29 +9,33 @@ import { auth } from 'firebase/app';
 
 export class LoginPage implements OnInit {
 
-  email: string = ""
-  password: string = ""
-
+  postData = {
+    "email": "tlopes@gmail.com",
+    "password": "123456"
+  };
   
+  url1 = 'http://45.55.144.89/fsapi/users/login';
+  json;
 
   constructor(
-    public afAuth: AngularFireAuth
-  ) {}
+    private http: HttpClient
+  ) {
+
+    this.http.post(this.url1, this.postData).toPromise().then((data:any) => {
+      console.log(data);
+      console.log(data.json);
+      this.json = JSON.stringify(data.json);
+    });
+  }
 
   ngOnInit() {
   }
 
+  
 
-  async login() {
-    const { email, password } = this
-    try {
-        const res = await this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    } catch(err) {
-      console.dir(err)
-      if(err.code === "auth/user-not-found") {
-        console.log("User not found") 
-      }
-    }
   }
 
-}
+
+
+
+
