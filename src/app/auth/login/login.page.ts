@@ -19,15 +19,15 @@ export class LoginPage implements OnInit {
 
   constructor(
     private http: HttpClient
-  ) {
+  ) {}
 
-    this.http.post(this.url1, this.postData).toPromise().then((data:any) => {
-      console.log(data);
-      console.log(data.json);
-      this.json = JSON.stringify(data.json);
-    });
-  }
-
+login () {
+  this.http.post(this.url1, this.postData).toPromise().then((data:any) => {
+    console.log(data);
+    console.log(data.json);
+    this.json = JSON.stringify(data.json);
+  });
+}
   ngOnInit() {
   }
 

@@ -22,16 +22,17 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
 
+
+   register () {
     this.http.post(this.url, this.postData).toPromise().then((data:any) => {
       console.log(data);
       console.log(data.json);
       this.json = JSON.stringify(data.json);
-    });
+    });  
 
-   }
-
+  }
 
 }
 
